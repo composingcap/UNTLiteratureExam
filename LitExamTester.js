@@ -31,7 +31,9 @@ function youtubeLoaded(){
 
   function init() {
       if (document.getElementById("isRendered").innerHTML != "1"){
-    Tabletop.init( { key: publicSpreadsheetUrl,
+          
+          
+            Tabletop.init( { key: publicSpreadsheetUrl,
                      callback: showInfo} )
       }
   }
@@ -40,8 +42,13 @@ function showInfo(data, tabletop){
   var cards = tabletop.sheets("Test Sheet").all();
     var ncards = cards.length;
     
-    //cards = cards.slice(0,9);
+    
     shuffle(cards);
+    var urlParams = new URLSearchParams(window.location.search);
+    var number = urlParams.get("n");
+    if (number != undefined){
+    cards = cards.slice(0,number);
+    }
     cards.forEach(generateCard);
     
     
