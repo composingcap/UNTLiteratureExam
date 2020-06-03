@@ -1,0 +1,37 @@
+.card{
+    height: 350px;
+    width: 700px;
+    background-color: whitesmoke;
+    border-color: black;
+    border-width: thin;
+    border-width: thin;
+    margin: 25px;
+    display: flex;
+    flex-direction: column;
+      
+    
+}
+.question{
+    
+}
+.answer{
+    display: none;
+}
+.prompt{
+    display: flex;
+    margin-left: 100px;
+
+    
+}
+
+.userInput{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 300px;
+    
+}
+.youtube{
+    margin-left: 100px;
+    position: relative;
+    
+}
