@@ -52,9 +52,11 @@ function reveal(elmt){
     var currentStyle =  answer.style.display;
     if (currentStyle != "block"){
     answer.style.display = "block";
+    elmt.innerHTML= "visibility_off"
     }
     else{
     answer.style.display = "none"
+    elmt.innerHTML= "visibility"
     }
 
     
@@ -64,7 +66,7 @@ function makeEntry(parent, question, answer){
     var prompt =  promptTemplate.cloneNode(true);
     prompt.id ="";
     var children = prompt.children
-    children[1].innerHTML = question;
+    children[0].innerHTML = question;
     children[3].innerHTML = answer;
     
     parent.children[0].appendChild(prompt); 

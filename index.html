@@ -1,4 +1,6 @@
 <head>
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href='style.css'>
@@ -11,12 +13,12 @@
 
 <div style="display: none">
     <div id=playButtonTemplate>
-    <button>play</button>
+    <i class="material-icons" style="font-size: 24pt">play_arrow</i>
     </div>
     <div id="youtube" class="youtube">
     </div>
     <div class=prompt id="promptTemplate">
-            <button onclick="reveal(this)"> </button><div class=question>Title:</div> <input class="userInput"> <div class=answer id="answer">The Piece</div>
+           <div class=question>Title:</div> <input class="userInput">  <i class="material-icons" onclick="reveal(this)"> visibility </i><div class=answer id="answer">The Piece</div>
         </div>
     <div id=cardTemplate>
         <div class="card">

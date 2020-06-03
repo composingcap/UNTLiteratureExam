@@ -1,25 +1,47 @@
+body{
+    
+    background-color: lightgrey;
+}
 .card{
-    height: 350px;
+
     width: 700px;
     background-color: whitesmoke;
     border-color: black;
     border-width: thin;
     border-width: thin;
     margin: 25px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
+    cursor: auto;
+      -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
       
     
 }
 .question{
+    width: 150px;
+    text-align: right;
     
 }
 .answer{
     display: none;
+    transition-duration: 250ms;
+    font-size: 12pt;
+    vertical-align: middle;
+    width: inherit;
+    margin-left: 10px;
+    
 }
 .prompt{
     display: flex;
-    margin-left: 100px;
+
+    margin-left: 10px;
+    
 
     
 }
@@ -28,10 +50,17 @@
     margin-left: 10px;
     margin-right: 10px;
     width: 300px;
+    height: 12pt;
     
 }
 .youtube{
     margin-left: 100px;
     position: relative;
+
     
+}
+.material-icons{
+font-size: 12pt;
+cursor: pointer;
+vertical-align: middle;
 }
