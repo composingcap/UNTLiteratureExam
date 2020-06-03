@@ -39,8 +39,9 @@ function youtubeLoaded(){
 function showInfo(data, tabletop){
   var cards = tabletop.sheets("Test Sheet").all();
     var ncards = cards.length;
-    //shuffle(cards);
-    cards = cards.slice(0,9);
+    
+    //cards = cards.slice(0,9);
+    shuffle(cards);
     cards.forEach(generateCard);
     
     
@@ -95,10 +96,10 @@ async function playYoutube(url){
 
 
 function generateCard(element){
-
+    if (element.Youtube != undefined && element.Youtube != ""){
     var thisCard = cardTemplate.cloneNode(true);
     cardParent.appendChild(thisCard)
-    
+   
     for (var property in element) {
         try{
        
@@ -118,6 +119,7 @@ function generateCard(element){
         catch{}
                 
     }
+    }
   
 }
 
@@ -133,6 +135,25 @@ function YouTubeGetID(url){
   }
     return ID;
 }
+var shuffle = function (array) {
 
+	var currentIndex = array.length;
+	var temporaryValue, randomIndex;
+
+	// While there remain elements to shuffle...
+	while (0 !== currentIndex) {
+		// Pick a remaining element...
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex -= 1;
+
+		// And swap it with the current element.
+		temporaryValue = array[currentIndex];
+		array[currentIndex] = array[randomIndex];
+		array[randomIndex] = temporaryValue;
+	}
+
+	return array;
+
+};
 
 window.addEventListener('DOMContentLoaded', init);
