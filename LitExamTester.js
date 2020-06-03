@@ -46,6 +46,7 @@ function showInfo(data, tabletop){
     shuffle(cards);
     var urlParams = new URLSearchParams(window.location.search);
     var number = urlParams.get("n");
+    console.log(number)
     if (number != undefined){
     cards = cards.slice(0,number);
     }
