@@ -7,8 +7,10 @@ var cardTemplate = document.getElementById("cardTemplate");
 var cardParent = document.getElementById("cards");
 var playButtonTemplate = document.getElementById("playButtonTemplate");
 
-
+var nrendered;
 var player;
+var number;
+var period;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube', {
@@ -31,7 +33,7 @@ function youtubeLoaded(){
 
   function init() {
       if (document.getElementById("isRendered").innerHTML != "1"){
-          
+        
           
             Tabletop.init( { key: publicSpreadsheetUrl,
                      callback: showInfo} )
@@ -45,11 +47,12 @@ function showInfo(data, tabletop){
     
     shuffle(cards);
     var urlParams = new URLSearchParams(window.location.search);
-    var number = urlParams.get("n");
-    console.log(number)
+    number = urlParams.get("n");
+    period = urlParams.get("p");
     if (number != undefined){
-    cards = cards.slice(0,number);
+    
     }
+    nrendered = 0;
     cards.forEach(generateCard);
     
     
@@ -71,6 +74,7 @@ function reveal(elmt){
 }
 
 function makeEntry(parent, question, answer){
+    
     var prompt =  promptTemplate.cloneNode(true);
     prompt.id ="";
     var children = prompt.children
@@ -78,7 +82,7 @@ function makeEntry(parent, question, answer){
     children[3].innerHTML = answer;
     
     parent.children[0].appendChild(prompt); 
-    
+   
     
 }
 
@@ -106,10 +110,14 @@ async function playYoutube(url){
 
 
 function generateCard(element){
+
+    if (!((number > 0) && (nrendered > number))){
     if (element.Youtube != undefined && element.Youtube != ""){
+    if ((period==undefined)||(period=="all")|| (element["General Period"]==period)){
+
     var thisCard = cardTemplate.cloneNode(true);
     cardParent.appendChild(thisCard)
-   
+
     for (var property in element) {
         try{
        
@@ -124,12 +132,18 @@ function generateCard(element){
                     playButton.children[0].setAttribute("onclick", "playYoutube('"+ answer +"')");
                     thisCard.children[0].appendChild(playButton);
                 }
-        
+             
         }
         catch{}
+        }
+      nrendered ++;
+        
                 
     }
     }
+            
+           
+    }    
   
 }
 
