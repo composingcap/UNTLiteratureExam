@@ -120,6 +120,7 @@ function generateCard(element){
 
     for (var property in element) {
         try{
+        if (!property.includes("hidden")){
        
         var question = property
         var answer = element[property];
@@ -132,6 +133,7 @@ function generateCard(element){
                     playButton.children[0].setAttribute("onclick", "playYoutube('"+ answer +"')");
                     thisCard.children[0].appendChild(playButton);
                 }
+        }
              
         }
         catch{}
@@ -149,6 +151,11 @@ function generateCard(element){
 
 function YouTubeGetID(url){
   var ID = '';
+  url.split(",")
+    if (url.isArray){
+    url = url[Math.floor(Math.random()*url.length)]
+    }
+    console.log(url);
   url = url.replace(/(>|<)/gi,'').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
   if(url[2] !== undefined) {
     ID = url[2].split(/[^0-9a-z_\-]/i);
