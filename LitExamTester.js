@@ -139,6 +139,7 @@ function generateCard(element) {
                                 var playButton = playButtonTemplate.cloneNode(true);
                                 playButton.id = ""
                                 playButton.children[0].setAttribute("onclick", "playYoutube('" + answer + "')");
+                                playButton.children[1].setAttribute("onclick", "openYoutube('" + answer + "')");
                                 thisCard.children[0].appendChild(playButton);
                             }
                         }
@@ -156,6 +157,10 @@ function generateCard(element) {
 
     }
 
+}
+    
+function openYoutube(link){
+    window.open(link)
 }
     
 function shuffleCards(){
