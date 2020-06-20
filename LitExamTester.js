@@ -12,6 +12,7 @@ var number;
 var period;
 var instrumentation;
 var selected = new Array();
+var group = "";
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube', {
@@ -52,6 +53,7 @@ function showInfo(data, tabletop) {
     var urlParams = new URLSearchParams(window.location.search);
     number = urlParams.get("n");
     period = urlParams.get("p");
+    group = urlParams.get("g");
     instrumentation = urlParams.get("i");
     if (number != undefined) {
 
@@ -117,6 +119,8 @@ async function playYoutube(url) {
 function generateCard(element) {
 
     if (!((number > 0) && (nrendered >= number))) {
+        if ((group == undefined) || (element["Test Group hidden"].includes(group))){            
+        
         if (element.Youtube != undefined && element.Youtube != "") {
             if ((period == undefined) || (period == "all") || (element["General Period"] == period)) {
 
@@ -154,7 +158,7 @@ function generateCard(element) {
             }
         }
 
-
+        }
     }
 
 }
