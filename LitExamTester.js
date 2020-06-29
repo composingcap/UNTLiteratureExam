@@ -50,6 +50,7 @@ function showInfo(data, tabletop) {
 
 
     shuffle(cards);
+    shuffle(cards);
     var urlParams = new URLSearchParams(window.location.search);
     number = urlParams.get("n");
     period = urlParams.get("p");
