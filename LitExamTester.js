@@ -179,7 +179,9 @@ function shuffleCards(){
     var cards = cardParent.innerHTML = "";
     nrendered = 0;
     selected = [];
+    counter = 0;
     newselected.forEach(generateCard);
+    
    
    
 }
