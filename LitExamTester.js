@@ -13,6 +13,7 @@ var period;
 var instrumentation;
 var selected = new Array();
 var group = "";
+var counter = 0
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube', {
@@ -59,6 +60,7 @@ function showInfo(data, tabletop) {
     if (number != undefined) {
 
     }
+    counter = 0;
     nrendered = 0;
     cards.forEach(generateCard);
 
@@ -88,7 +90,7 @@ function makeEntry(parent, question, answer) {
     children[0].innerHTML = question;
     children[3].innerHTML = answer;
 
-    parent.children[0].appendChild(prompt);
+    parent.children[1].appendChild(prompt);
 
 
 }
@@ -145,13 +147,16 @@ function generateCard(element) {
                                 playButton.id = ""
                                 playButton.children[0].setAttribute("onclick", "playYoutube('" + answer + "')");
                                 playButton.children[1].setAttribute("onclick", "openYoutube('" + answer + "')");
-                                thisCard.children[0].appendChild(playButton);
+                                thisCard.children[1].appendChild(playButton);
                             }
-                        }
+                        }                        
 
                     } catch {}
+                    
                 }
-                nrendered++;  
+                nrendered++; 
+                counter += 1;
+                thisCard.children[0].innerHTML = counter;
                 selected= selected.concat(element);
                 }
 
