@@ -5,6 +5,7 @@ var promptTemplate = document.getElementById("promptTemplate");
 var cardTemplate = document.getElementById("cardTemplate");
 var cardParent = document.getElementById("cards");
 var playButtonTemplate = document.getElementById("playButtonTemplate");
+var sheetName = "Test Sheet";
 
 var nrendered;
 var player;
@@ -14,6 +15,7 @@ var instrumentation;
 var selected = new Array();
 var group = "";
 var counter = 0
+var urlParams = new URLSearchParams(window.location.search);
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube', {
@@ -35,7 +37,21 @@ function youtubeLoaded() {
 }
 
 function init() {
+    
     if (document.getElementById("isRendered").innerHTML != "1") {
+        number = urlParams.get("n");
+        period = urlParams.get("p");
+        group = urlParams.get("g");
+        sheeturl = urlParams.get("sheet");
+        
+        if (sheeturl != null){
+            publicSpreadsheetUrl =  "https://docs.google.com/spreadsheets/d/" + sheeturl + "/edit";
+            if (urlParams.get("name")!= null){
+                sheetName = urlParams.get("name");
+            }
+        }
+        
+        console.log("opening " + publicSpreadsheetUrl + "... page name " + sheetName);
 
 
         Tabletop.init({
@@ -46,16 +62,13 @@ function init() {
 }
 
 function showInfo(data, tabletop) {
-    var cards = tabletop.sheets("Test Sheet").all();
+    var cards = tabletop.sheets(sheetName).all();
     var ncards = cards.length;
 
 
     shuffle(cards);
     shuffle(cards);
-    var urlParams = new URLSearchParams(window.location.search);
-    number = urlParams.get("n");
-    period = urlParams.get("p");
-    group = urlParams.get("g");
+
     instrumentation = urlParams.get("i");
     if (number != undefined) {
 
