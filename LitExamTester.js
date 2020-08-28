@@ -146,6 +146,7 @@ function generateCard(element) {
 
                 var thisCard = cardTemplate.cloneNode(true);
                 cardParent.appendChild(thisCard)
+                //thisCard = thisCard.children[0];
 
                 for (var property in element) {
                     try {
