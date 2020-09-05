@@ -6,7 +6,7 @@ var cardTemplate = document.getElementById("cardTemplate");
 var cardParent = document.getElementById("cards");
 var playButtonTemplate = document.getElementById("playButtonTemplate");
 var sheetName = "Test Sheet";
-
+var arng;
 var nrendered;
 var player;
 var number;
@@ -16,6 +16,7 @@ var selected = new Array();
 var group = "";
 var counter = 0
 var urlParams = new URLSearchParams(window.location.search);
+var randomSeed;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube', {
@@ -37,8 +38,15 @@ function youtubeLoaded() {
 }
 
 function init() {
-    
+
+    arng = new alea(randomSeed);
     if (document.getElementById("isRendered").innerHTML != "1") {
+            randomSeed = urlParams.get("seed");
+    if (randomSeed == null || randomSeed ==''){
+        randomSeed = Math.floor(arng()*100000);
+        insertParam("seed", randomSeed)
+    
+    }
         number = urlParams.get("n");
         period = urlParams.get("p");
         group = urlParams.get("g");
@@ -109,6 +117,7 @@ function makeEntry(parent, question, answer) {
 }
 
 async function playYoutube(url) {
+    arng = new alea(randomSeed+url.length)
     if (player.getPlayerState() == 1) {
         player.pauseVideo();
     } else {
@@ -120,13 +129,13 @@ async function playYoutube(url) {
         }
         player.pauseVideo();
         var duration = player.getDuration();
-        var possibleStart = duration - 30;
-        var startTime = Math.random() * possibleStart;
+        var possibleStart = duration - 60;
+        var startTime = arng()* possibleStart;
 
         player.loadVideoById({
             'videoId': YouTubeGetID(url),
             'startSeconds': startTime,
-            'endSeconds': startTime + 30
+            'endSeconds': startTime + 60
         });
     }
 }
@@ -204,7 +213,7 @@ function YouTubeGetID(url) {
     var ID = '';
     url.split(",")
     if (url.isArray) {
-        url = url[Math.floor(Math.random() * url.length)]
+        url = url[Math.floor(arng() * url.length)]
     }
     console.log(url);
     url = url.replace(/(>|<)/gi, '').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
@@ -224,7 +233,7 @@ var shuffle = function (array) {
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
         // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
+        randomIndex = Math.floor(arng() * currentIndex);
         currentIndex -= 1;
 
         // And swap it with the current element.
@@ -236,5 +245,32 @@ var shuffle = function (array) {
     return array;
 
 };
+    
+function insertParam(key, value) {
+    key = encodeURIComponent(key);
+    value = encodeURIComponent(value);
 
+    // kvp looks like ['key1=value1', 'key2=value2', ...]
+    var kvp = document.location.search.substr(1).split('&');
+    let i=0;
+
+    for(; i<kvp.length; i++){
+        if (kvp[i].startsWith(key + '=')) {
+            let pair = kvp[i].split('=');
+            pair[1] = value;
+            kvp[i] = pair.join('=');
+            break;
+        }
+    }
+
+    if(i >= kvp.length){
+        kvp[kvp.length] = [key,value].join('=');
+    }
+
+    // can return this or...
+    let params = kvp.join('&');
+
+    // reload page with new params
+    document.location.search = params;
+}
 window.addEventListener('DOMContentLoaded', init);
