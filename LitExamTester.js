@@ -39,14 +39,15 @@ function youtubeLoaded() {
 
 function init() {
 
-    arng = new alea(randomSeed);
+   
     if (document.getElementById("isRendered").innerHTML != "1") {
             randomSeed = urlParams.get("seed");
     if (randomSeed == null || randomSeed ==''){
         randomSeed = Math.floor(Math.random()*100000);
         insertParam("seed", randomSeed)
-    
+        
     }
+         arng = new alea(randomSeed);
         number = urlParams.get("n");
         period = urlParams.get("p");
         group = urlParams.get("g");
