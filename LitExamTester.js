@@ -43,7 +43,7 @@ function init() {
     if (document.getElementById("isRendered").innerHTML != "1") {
             randomSeed = urlParams.get("seed");
     if (randomSeed == null || randomSeed ==''){
-        randomSeed = Math.floor(arng()*100000);
+        randomSeed = Math.floor(Math.random()*100000);
         insertParam("seed", randomSeed)
     
     }
